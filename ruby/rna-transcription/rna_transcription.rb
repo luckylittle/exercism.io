@@ -8,10 +8,15 @@ end
 class Complement
   REPLACEMENT = { "G" => "C", "C" => "G", "T" => "A", "A" => "U" }
   def self.of_dna(dna)
-    result = dna.gsub(/(G)|(C)|(T)|(A)/) { |char| REPLACEMENT[char] }
-    #result = dna.gsub('G', 'C').gsub('C', 'G').gsub('T', 'A').gsub('A', 'U') - this will be chaining it!
+    if dna =~ /[^G*,^C*,^T*,^A*]/ then                     # Rubular - http://rubular.com/
+      result = ''
+     else
+      result = dna.gsub(/(G)|(C)|(T)|(A)/) { |char| REPLACEMENT[char] }
+    end
   end
 end
 
-puts Complement.of_dna('ACGTGGTCTTAA')
+#puts Complement.of_dna('ACGTGGTCTTAA')
 # Should be                    'UGCACCAGAAUU'
+#puts Complement.of_dna('UGCAXXXGAAUU')
+# Should fail
