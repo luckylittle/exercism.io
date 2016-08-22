@@ -6,8 +6,10 @@ module BookKeeping
 end
 
 class Complement
+  REPLACEMENT = { "G" => "C", "C" => "G", "T" => "A", "A" => "U" }
   def self.of_dna(dna)
-    result = dna.gsub('G', 'C').gsub('C', 'G').gsub('T', 'A').gsub('A', 'U')
+    result = dna.gsub(/(G)|(C)|(T)|(A)/) { |char| REPLACEMENT[char] }
+    #result = dna.gsub('G', 'C').gsub('C', 'G').gsub('T', 'A').gsub('A', 'U') - this will be chaining it!
   end
 end
 
